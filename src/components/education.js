@@ -18,37 +18,41 @@ class EducationInfoForm extends Component {
 
   handleChange(e) {
     let newState = {};
-    newState[e.target.id] = e.target.value;
+    let index = e.target.id.substring(0, e.target.id.length - 1);
+    newState[index] = e.target.value;
     this.setState(newState);
   }
 
   handleSubmit(e) {
     this.props.handleSubmit(e);
-    this.handleChange(e);
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} id="educationInformationForm">
+      <form
+        onSubmit={this.handleSubmit}
+        className="educationInformationForm"
+        id={"eduForm" + this.props.count}
+      >
         <h2>Education</h2>
         <input
           onChange={this.handleChange}
           type="text"
-          id="university"
+          id={"university" + this.props.count}
           placeholder="University"
           value={this.state.university}
         ></input>
         <input
           onChange={this.handleChange}
           type="text"
-          id="degree"
+          id={"degree" + this.props.count}
           placeholder="Degree"
           value={this.state.degree}
         ></input>
         <input
           onChange={this.handleChange}
           type="text"
-          id="subject"
+          id={"subject" + this.props.count}
           placeholder="Subject"
           value={this.state.subject}
         ></input>
@@ -56,21 +60,22 @@ class EducationInfoForm extends Component {
         <input
           onChange={this.handleChange}
           type="date"
-          id="start"
+          id={"start" + this.props.count}
           value={this.state.start}
         ></input>
         <label htmlFor="end">End</label>
         <input
           onChange={this.handleChange}
           type="date"
-          placeholder="end"
+          id={"end" + this.props.count}
           value={this.state.end}
         ></input>
         <input type="submit"></input>
-        <input type="button" value="Add" />
+        <input type="button" value="Add" onclick={this.props.handleAdd} />
         <input
           type="button"
           value="Delete"
+          onclick={this.props.handleDelete}
           style={{ display: this.props.deleteHidden ? "none" : "inline" }}
         />
       </form>

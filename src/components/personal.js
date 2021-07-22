@@ -34,7 +34,8 @@ class PersonalInfoForm extends Component {
     return (
       <form
         onSubmit={this.handleSubmit}
-        id="personalInformationForm"
+        className="personalInformationForm"
+        id="personalForm"
       >
         <h2>Personal Information</h2>
         <input

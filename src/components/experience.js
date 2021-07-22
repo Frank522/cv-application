@@ -19,7 +19,8 @@ class ExperienceInfoForm extends Component {
 
   handleChange(e) {
     let newState = {};
-    newState[e.target.id] = e.target.value;
+    let index = e.target.id.substring(0, e.target.id.length - 1);
+    newState[index] = e.target.value;
     this.setState(newState);
   }
 
@@ -32,48 +33,54 @@ class ExperienceInfoForm extends Component {
     return (
       <form
         onSubmit={this.handleSubmit}
-        id="experienceInformationForm"
+        className="experienceInformationForm"
+        id={"expForm" + this.props.count}
       >
         <h2>Experience</h2>
         <input
           onChange={this.handleChange}
           type="text"
-          id="position"
+          id={"position" + this.props.count}
           placeholder="Position"
           value={this.state.position}
         ></input>
         <input
           onChange={this.handleChange}
           type="text"
-          id="company"
+          id={"company" + this.props.count}
           placeholder="Company"
           value={this.state.company}
         ></input>
         <input
           onChange={this.handleChange}
           type="text"
-          id="city"
+          id={"city" + this.props.count}
           placeholder="City"
           value={this.state.city}
         ></input>
-        <label htmlFor="from">From</label>
+        <label htmlFor={"from" + this.props.count}>From</label>
         <input
           onChange={this.handleChange}
-          id="from"
+          id={"from" + this.props.count}
           type="date"
           value={this.state.from}
         ></input>
-        <label htmlFor="to">To</label>
+        <label htmlFor={"to" + this.props.count}>To</label>
         <input
           onChange={this.handleChange}
-          id="to"
+          id={"to" + this.props.count}
           type="date"
           placeholder={formatISO(new Date(), { representation: "date" })}
           value={this.state.to}
         ></input>
         <input type="submit"></input>
-        <input type="button" value="Add"/>
-        <input type="button" value="Delete" style={{display: (this.props.deleteHidden? "none" : "inline")}}/>
+        <input type="button" value="Add" onclick={this.props.handleAdd} />
+        <input
+          type="button"
+          value="Delete"
+          onclick={this.props.handleDelete}
+          style={{ display: this.props.deleteHidden ? "none" : "inline" }}
+        />
       </form>
     );
   }
