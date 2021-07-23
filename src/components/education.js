@@ -71,11 +71,11 @@ class EducationInfoForm extends Component {
           value={this.state.end}
         ></input>
         <input type="submit"></input>
-        <input type="button" value="Add" onclick={this.props.handleAdd} />
+        <input type="button" value="Add" onClick={this.props.handleAdd} />
         <input
           type="button"
           value="Delete"
-          onclick={this.props.handleDelete}
+          onClick={this.props.handleDelete}
           style={{ display: this.props.deleteHidden ? "none" : "inline" }}
         />
       </form>

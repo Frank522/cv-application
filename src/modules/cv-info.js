@@ -96,11 +96,12 @@ const CVInformation = (() => {
         deletedEducation[deletedEducation.length] = index;
         break;
     }
+    console.log(state, deletedExperience, deletedEducation);
   };
 
   //appends a object to experience or education arrays
   const handleAdd = (e) => {
-    let formType = e.targetparentNode.getAttribute("class");
+    let formType = e.target.parentNode.getAttribute("class");
     switch (formType) {
         case "experienceInformationForm":
           state.experience.push({});
@@ -109,6 +110,7 @@ const CVInformation = (() => {
           state.education.push({});
           break;
       }
+      console.log(state);
   };
 
   return {handleSubmit, handleDelete, handleAdd};
