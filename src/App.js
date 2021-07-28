@@ -13,8 +13,10 @@ class App extends Component {
         <header className="App-header">
           <h1>CV Builder Application</h1>
         </header>
-        <DataForm />
-        <Buttons/>
+        <div id="content">
+          <DataForm />
+          <Buttons />
+        </div>
       </div>
     );
   }

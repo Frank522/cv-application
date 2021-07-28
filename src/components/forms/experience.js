@@ -26,7 +26,6 @@ class ExperienceInfoForm extends Component {
 
   handleSubmit(e) {
     this.props.handleSubmit(e);
-    this.handleChange(e);
   }
 
   render() {
