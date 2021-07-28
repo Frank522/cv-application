@@ -59,6 +59,8 @@ const CVInformation = (() => {
         index = parseInt(formId.substring(7));
         currentData = state.education[index];
         break;
+      default:
+        return "ERROR";
     }
 
     Array.from(document.querySelectorAll("#" + formId + " input")).forEach(
@@ -66,7 +68,7 @@ const CVInformation = (() => {
         //simpleId is attribute associated with the input
         //within the comparison object
         let simpleId = input.id;
-        if (formType != "personalInformationForm") {
+        if (formType !== "personalInformationForm") {
           simpleId = input.id.substring(0, input.id.length - 1);
         }
 
@@ -95,6 +97,8 @@ const CVInformation = (() => {
       case "educationInformationForm":
         deletedEducation[deletedEducation.length] = index;
         break;
+      default:
+        return "ERROR";
     }
     console.log(state, deletedExperience, deletedEducation);
   };
@@ -103,17 +107,57 @@ const CVInformation = (() => {
   const handleAdd = (e) => {
     let formType = e.target.parentNode.getAttribute("class");
     switch (formType) {
-        case "experienceInformationForm":
-          state.experience.push({});
-          break;
-        case "educationInformationForm":
-          state.education.push({});
-          break;
-      }
-      console.log(state);
+      case "experienceInformationForm":
+        state.experience.push({});
+        break;
+      case "educationInformationForm":
+        state.education.push({});
+        break;
+      default:
+        return "ERROR";
+    }
+    console.log(state);
   };
 
-  return {handleSubmit, handleDelete, handleAdd};
+  const handleEdit = (e) => {
+    const inputs = document.querySelectorAll(
+      'input:not([type="button"], [type="submit"])'
+    );
+    Array.from(inputs).forEach((input) => {
+      let form = input.parentElement;
+      let formType = form.getAttribute('class');
+      let index = parseInt(form.id.substring(7));
+      let simpleId = input.id.substring(0, input.id.length - 1);
+      switch(formType) {
+        case "personalInformationForm":
+          input.value = state.personal[input.id] || "";
+          break;
+        case "experienceInformationForm":
+          input.value = state.experience[index][simpleId] || "";
+          break;
+        case "educationInformationForm":
+          input.value = state.education[index][simpleId] || "";
+          break;
+        default:
+          return "ERROR";
+      }
+    });
+  };
+
+  const getFormData = (type, count) => {
+    switch (type) {
+      case "personalInformationForm":
+        return state.personal;
+      case "experienceInformationForm":
+        return state.experience[count];
+      case "educationInformationForm":
+        return state.education[count];
+      default:
+        return "ERROR";
+    }
+  };
+
+  return { handleSubmit, handleDelete, handleAdd, getFormData, handleEdit };
 })();
 
 export default CVInformation;

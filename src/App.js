@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import DataForm from "./components/data-form";
-
+import DataForm from "./components/forms/data-form";
+import Buttons from "./components/buttons/button-div";
 
 class App extends Component {
   constructor(props) {
@@ -11,8 +11,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <DataForm/>
+          <h1>CV Builder Application</h1>
         </header>
+        <DataForm />
+        <Buttons/>
       </div>
     );
   }

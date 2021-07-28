@@ -25,9 +25,7 @@ class PersonalInfoForm extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();
     this.props.handleSubmit(e);
-    this.handleChange(e);
   }
 
   render() {

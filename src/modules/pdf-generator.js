@@ -1,0 +1,1 @@
+import CVInformation from "./cv-info";

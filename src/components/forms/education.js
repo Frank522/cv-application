@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CVInformation from "../../modules/cv-info";
 
 class EducationInfoForm extends Component {
   constructor(props) {

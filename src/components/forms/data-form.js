@@ -1,7 +1,7 @@
 import ExperienceInfoForm from "./experience";
 import EducationInfoForm from "./education";
 import PersonalInfoForm from "./personal";
-import CVInformation from "../modules/cv-info";
+import CVInformation from "../../modules/cv-info";
 import React, { Component } from "react";
 
 class DataForm extends Component {
