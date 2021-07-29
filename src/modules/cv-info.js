@@ -27,9 +27,33 @@ const CVInformation = (() => {
    * }
    */
   const state = {
-    personal: {},
-    experience: [{}],
-    education: [{}],
+    personal: {
+      firstName: "",
+      lastName: "",
+      title: "",
+      address: "",
+      phoneNumber: "",
+      email: "",
+      description: "",
+    },
+    experience: [
+      {
+        position: "",
+        company: "",
+        city: "",
+        from: "",
+        to: "",
+      },
+    ],
+    education: [
+      {
+        university: "",
+        degree: "",
+        subject: "",
+        start: "",
+        end: "",
+      },
+    ],
   };
 
   //indices of all experienc forms that have been deleted
@@ -108,10 +132,22 @@ const CVInformation = (() => {
     let formType = e.target.parentNode.getAttribute("class");
     switch (formType) {
       case "experienceInformationForm":
-        state.experience.push({});
+        state.experience.push({
+          position: "",
+          company: "",
+          city: "",
+          from: "",
+          to: "",
+        });
         break;
       case "educationInformationForm":
-        state.education.push({});
+        state.education.push({
+          university: "",
+          degree: "",
+          subject: "",
+          start: "",
+          end: "",
+        });
         break;
       default:
         return "ERROR";
@@ -125,10 +161,10 @@ const CVInformation = (() => {
     );
     Array.from(inputs).forEach((input) => {
       let form = input.parentElement;
-      let formType = form.getAttribute('class');
+      let formType = form.getAttribute("class");
       let index = parseInt(form.id.substring(7));
       let simpleId = input.id.substring(0, input.id.length - 1);
-      switch(formType) {
+      switch (formType) {
         case "personalInformationForm":
           input.value = state.personal[input.id] || "";
           break;
@@ -144,17 +180,22 @@ const CVInformation = (() => {
     });
   };
 
-  const getFormData = (type, count) => {
-    switch (type) {
-      case "personalInformationForm":
-        return state.personal;
-      case "experienceInformationForm":
-        return state.experience[count];
-      case "educationInformationForm":
-        return state.education[count];
-      default:
-        return "ERROR";
+  const getFormData = () => {
+    let data = {};
+    data.personal = state.personal;
+    data.experience = [];
+    data.education = [];
+    for (let i = 0; i < state.experience.length; i++) {
+      if (!deletedExperience.includes(i)) {
+        data.experience[data.experience.length] = state.experience[i];
+      }
     }
+    for (let i = 0; i < state.education.length; i++) {
+      if (!deletedEducation.includes(i)) {
+        data.education[data.education.length] = state.education[i];
+      }
+    }
+    return data;
   };
 
   return { handleSubmit, handleDelete, handleAdd, getFormData, handleEdit };

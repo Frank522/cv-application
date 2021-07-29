@@ -1,12 +1,9 @@
 import React, { Component } from "react";
 import DataForm from "./components/forms/data-form";
 import Buttons from "./components/buttons/button-div";
+import PDFDisplay from "./components/displays/pdf-display";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="App">
@@ -16,6 +13,7 @@ class App extends Component {
         <div id="content">
           <DataForm />
           <Buttons />
+          <PDFDisplay />
         </div>
       </div>
     );
